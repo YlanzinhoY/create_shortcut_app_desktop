@@ -31,4 +31,4 @@ function CreateDesktopEntry(name, exec, icon, namefile)
 
 end
 
-createDesktopEntry(nome, idade, icone, namefile)
+CreateDesktopEntry(nome, idade, icone, namefile)
