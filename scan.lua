@@ -11,7 +11,7 @@ print("digite o nome do arquivo:")
 local namefile = io.read()
 
 
-function createDesktopEntry(name, exec, icon, namefile)
+function CreateDesktopEntry(name, exec, icon, namefile)
     local content = string.format(
         "[Desktop Entry]\n" ..
         "Name=%s\n" ..
