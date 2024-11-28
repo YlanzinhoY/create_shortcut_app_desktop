@@ -22,7 +22,7 @@ func scan() {
 		fmt.Println(v)
 	}
 
-	template(*programName, *pathValue+*programName, *programName+".svg")
+	template(*programName, *pathValue+"/"+*programName, *pathValue+"/"+*programName+".svg")
 
 }
 
