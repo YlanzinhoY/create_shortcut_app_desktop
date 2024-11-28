@@ -1,23 +1,55 @@
 package main
 
 import (
+	"flag"
+	"fmt"
+	"log"
 	"os"
-	"os/exec"
 )
+
+func scan() {
+	pathValue := flag.String("path", "", "Espeficica o caminho do diretorio")
+	programName := flag.String("name", "", "nome do app")
+	flag.Parse()
+	fmt.Println(*pathValue)
+	arr, err := os.ReadDir(*pathValue)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	for _, v := range arr {
+		fmt.Println(v)
+	}
+
+	template(*programName, *pathValue+*programName, *programName+".svg")
+
+}
 
 func main() {
 
-	cmd := exec.Command("lua", "scan.lua")
+	scan()
+}
 
-	cmd.Stdin = os.Stdin
+func template(name, exec, icon string) {
+	str := fmt.Sprintf(`[Desktop Entry]
+Name=%s
+Exec=%s
+Icon=%s
+Type=Application
+Categories=Application;
+`, name, exec, icon)
 
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
+	appName := name + ".desktop"
 
-	err := cmd.Run()
+	f, err := os.Create(appName)
 
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
+		return
 	}
+
+	f.WriteString(str)
+	log.Println(name + ".desktop" + " Create with successfully")
 
 }
